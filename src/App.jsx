@@ -6,31 +6,28 @@ import { DollarSign, Tag, Calendar, Loader2, Send, Zap, User, BarChart4, Archive
 
 // --- Configuración de Firebase y Variables Globales (Ajustadas para Despliegue) ---
 /*
-    IMPORTANTE PARA EL DEPLOY (Vercel):
-    En un entorno de despliegue, NO existen las variables globales como __firebase_config. 
-    Por ello, el código ahora intenta leer la configuración desde una variable de entorno:
-    process.env.REACT_APP_FIREBASE_CONFIG.
-
-    Instrucción: Debes establecer la variable de entorno REACT_APP_FIREBASE_CONFIG en Vercel.
+    IMPORTANTE PARA EL DEPLOY (Netlify/Vercel):
+    La configuración de Firebase y las claves de API se leen desde variables de entorno 
+    (process.env) para mayor seguridad y flexibilidad.
 */
-const rawFirebaseConfig = typeof __firebase_config !== 'undefined' 
-    ? __firebase_config // Lee del entorno Canvas si está disponible
-    : (process.env.REACT_APP_FIREBASE_CONFIG || '{}'); // Lee de ENV en despliegue
-
-// Intenta parsear la configuración si existe
-const firebaseConfig = rawFirebaseConfig ? JSON.parse(rawFirebaseConfig) : {};
+const firebaseConfig = {
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID
+};
 
 // Usamos un ID de App genérico si no se proporciona uno (necesario para el path de Firestore)
-const appId = typeof __app_id !== 'undefined' 
-    ? __app_id 
-    : (process.env.REACT_APP_APP_ID || 'expense-tracker-prod'); 
+const appId = process.env.REACT_APP_APP_ID || 'expense-tracker-prod'; 
 
 // El token de autenticación inicial no se usa en despliegues reales
 const initialAuthToken = null; 
 
 // URL del API de Gemini (Usaremos gemini-2.5-flash-preview-05-20 para texto y estructurado)
 const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent";
-const API_KEY = ""; // La clave se provee automáticamente en el entorno
+const API_KEY = process.env.REACT_APP_GEMINI_API_KEY; // La clave se lee desde el entorno
 
 // Función de utilidad para manejar el backoff exponencial en las llamadas API
 const fetchWithBackoff = async (url, options, retries = 3, delay = 1000) => {
