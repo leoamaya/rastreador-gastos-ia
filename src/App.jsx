@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { getFirestore, collection, query, onSnapshot, addDoc, deleteDoc, getDocs, Timestamp, doc, updateDoc } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
-import { DollarSign, Tag, Calendar, Loader2, Send, Zap, User, BarChart4, Archive, RotateCcw, XCircle, SquarePen } from 'lucide-react';
+import { DollarSign, Tag, Calendar, Loader2, Send, Zap, User, BarChart4, Archive, RotateCcw, XCircle, PenSquare } from 'lucide-react';
 
 // --- Configuración de Firebase y Variables Globales (Ajustadas para Despliegue) ---
 /*
@@ -693,7 +693,7 @@ const App = () => {
                                             title="Editar Gasto"
                                             disabled={isLoading || isEditing}
                                         >
-                                            <SquarePen className="w-5 h-5" />
+                                            <PenSquare className="w-5 h-5" />
                                         </button>
 
                                         {/* Botón de Eliminar */}
