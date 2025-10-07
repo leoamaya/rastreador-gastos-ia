@@ -281,16 +281,19 @@ const App = () => {
                 console.log("Gasto actualizado con éxito.");
 
             } else {
-                // --- Lógica de Añadir (MODIFICADA PARA PRUEBA) ---
-                console.log("Iniciando prueba de escritura en /test_logs...");
-                const testCollectionRef = collection(db, "test_logs");
-                await addDoc(testCollectionRef, {
-                    message: "Prueba de escritura exitosa",
+                // --- Lógica de Añadir ---
+                const { category, classification } = await categorizeExpense(description);
+
+                const newExpense = {
+                    amount: numericAmount,
                     description: description.trim(),
-                    userId: userId, // Incluimos el userId para referencia
-                    timestamp: Timestamp.now()
-                });
-                console.log("Prueba de escritura en /test_logs finalizada con éxito.");
+                    category: category,
+                    classification: classification,
+                    timestamp: Timestamp.now(),
+                };
+
+                const expensesCollectionPath = `/artifacts/${appId}/users/${userId}/expenses`;
+                await addDoc(collection(db, expensesCollectionPath), newExpense);
 
                 setAmount('');
                 setDescription('');
