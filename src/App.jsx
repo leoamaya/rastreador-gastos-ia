@@ -517,7 +517,7 @@ const App = () => {
                 {userId && (
                     <div className="mt-4 text-xs text-gray-400 flex items-center justify-center">
                         <User className="w-3 h-3 mr-1" />
-                        ID de Usuario: {userId} | App ID: {appId}
+                        ID de Usuario: {userId}
                     </div>
                 )}
             </header>
