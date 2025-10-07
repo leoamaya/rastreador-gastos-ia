@@ -282,7 +282,10 @@ const App = () => {
 
             } else {
                 // --- Lógica de Añadir ---
-                const { category, classification } = await categorizeExpense(description);
+                // **PRUEBA TEMPORAL: Se desactiva la categorización con IA para diagnosticar el problema.**
+                // const { category, classification } = await categorizeExpense(description);
+                const category = 'General'; // Valor temporal
+                const classification = 'Prueba'; // Valor temporal
 
                 const newExpense = {
                     amount: numericAmount,
