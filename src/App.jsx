@@ -495,7 +495,7 @@ const App = () => {
     // Diseño y estructura (Tailwind CSS para elegancia y responsividad)
     return (
         <div className="min-h-screen bg-gray-50 p-4 sm:p-8 font-['Inter']">
-            <script src="https://cdn.tailwindcss.com"></script>
+
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
                 /* Animación de entrada sutil para los ítems */

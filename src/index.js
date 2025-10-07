@@ -1,5 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import './index.css'; // Importa los estilos de Tailwind
 import App from './App'; // Importa el componente principal ExpenseTracker (ahora App.jsx)
 
 // 1. Obtiene el contenedor principal del DOM (el <div id="root"> en index.html)
